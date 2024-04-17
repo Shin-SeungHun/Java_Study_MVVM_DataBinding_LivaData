@@ -2,15 +2,15 @@ package com.ssh.java_study_mvvm_databinding_livadata;
 
 import android.util.Log;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class MainViewModel extends ViewModel {
-    public int score = 0;
+    public MutableLiveData<Integer> score = new MutableLiveData<>();
 
     public MainViewModel() {
         Log.d("MainViewModel", "MainViewModel 생성");
-        scorePlus();
-        scoreMinus();
+        score.setValue(0);
     }
 
     @Override
@@ -20,10 +20,17 @@ public class MainViewModel extends ViewModel {
     }
 
     public void scorePlus() {
-        score++;
+        Integer currentValue = score.getValue();
+        if (currentValue != null) {
+            score.setValue(currentValue + 1);
+        }
     }
 
     public void scoreMinus() {
-        score--;
+        Integer currentValue = score.getValue();
+        if (currentValue != null) {
+            score.setValue(currentValue - 1);
+
+        }
     }
 }
