@@ -40,13 +40,11 @@ public class MainActivity extends AppCompatActivity {
         // 기본값 지정
         binding.scoreText.setText(String.valueOf(viewModel.score));
 
-        // score값이 변경되면 변경된 score값을 텍스트뷰에 전달
-        viewModel.score.observe(this, integer -> binding.scoreText.setText(String.valueOf(viewModel.score.getValue())));
+        // 생명주기 셋팅(안하면 데이터 업데이트 안됨)
+        binding.setLifecycleOwner(this);
 
-
-        binding.minusBtn.setOnClickListener(v -> viewModel.scoreMinus());
-
-        binding.plusBtn.setOnClickListener(v -> viewModel.scorePlus());
+        // 변수에 viewModel 초기화
+        binding.setViewModel(viewModel);
 
     } // onCreate
 } // MainActivity
