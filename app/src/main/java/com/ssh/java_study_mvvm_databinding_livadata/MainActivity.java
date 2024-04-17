@@ -1,6 +1,7 @@
 package com.ssh.java_study_mvvm_databinding_livadata;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.ssh.java_study_mvvm_databinding_livadata.databinding.ActivityMainBinding;
 
@@ -15,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
 
-    private int score = 0;
+    MainViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +32,19 @@ public class MainActivity extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        Log.d("MainActivitry","onCreate");
+
+
+
         binding.minusBtn.setOnClickListener(v -> {
-            score--;
-            binding.scoreText.setText(String.valueOf(score));
+            viewModel.scorePlus();
+            binding.scoreText.setText(String.valueOf(viewModel.score));
         });
 
         binding.plusBtn.setOnClickListener(v -> {
-            score++;
-            binding.scoreText.setText(String.valueOf(score));
+            viewModel.scoreMinus();
+            binding.scoreText.setText(String.valueOf(viewModel.score));
         });
 
     } // onCreate
