@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ssh.java_study_mvvm_databinding_livadata.MainViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -9,7 +16,9 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
+
         <Button
+            android:onClick="@{()-> viewModel.scorePlus()}"
             android:id="@+id/plus_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -22,6 +31,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:onClick="@{()-> viewModel.scoreMinus()}"
             android:id="@+id/minus_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -38,7 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
-            android:text="0"
+            android:text="@{viewModel.score}"
             android:textSize="150sp"
             app:layout_constraintBottom_toTopOf="@+id/minus_btn"
             app:layout_constraintEnd_toEndOf="parent"
