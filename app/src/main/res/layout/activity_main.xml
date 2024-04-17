@@ -48,7 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
-            android:text="@{viewModel.score}"
+            android:text="@{String.valueOf(viewModel.score)}"
             android:textSize="150sp"
             app:layout_constraintBottom_toTopOf="@+id/minus_btn"
             app:layout_constraintEnd_toEndOf="parent"
