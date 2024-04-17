@@ -30,22 +30,23 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        // 초기화
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
+        // viewModel 초기화
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        Log.d("MainActivitry","onCreate");
+        Log.d("MainActivitry", "onCreate");
+
+        // 기본값 지정
+        binding.scoreText.setText(String.valueOf(viewModel.score));
+
+        // score값이 변경되면 변경된 score값을 텍스트뷰에 전달
+        viewModel.score.observe(this, integer -> binding.scoreText.setText(String.valueOf(viewModel.score.getValue())));
 
 
+        binding.minusBtn.setOnClickListener(v -> viewModel.scoreMinus());
 
-        binding.minusBtn.setOnClickListener(v -> {
-            viewModel.scorePlus();
-            binding.scoreText.setText(String.valueOf(viewModel.score));
-        });
-
-        binding.plusBtn.setOnClickListener(v -> {
-            viewModel.scoreMinus();
-            binding.scoreText.setText(String.valueOf(viewModel.score));
-        });
+        binding.plusBtn.setOnClickListener(v -> viewModel.scorePlus());
 
     } // onCreate
 } // MainActivity
